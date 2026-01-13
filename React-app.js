@@ -6,6 +6,7 @@ function ToDolist(){
     const [newTask, setNewTask] = usestate("");
 
     function handleInputChange(event){
+        setNewTask(event.target.value);
 
     }
 
@@ -22,10 +23,28 @@ function ToDolist(){
     }
 
     function moveTaskDown(index){
-        
+
     }
 
-    return (<></>);
+    return(
+    <div className="to-do-list">
+
+        <h1To-Do-List></h1>
+
+        <div>
+            <input
+                type="text"
+                placeholder="Enter a task"
+                value={newTask}
+                onChange={handleInputChange}/>
+            <button 
+                className="add-button"
+                onClick={}>
+                Add
+            </button>
+        </div>
+
+    </div>);
+            
 }
 export default ToDoList
-
