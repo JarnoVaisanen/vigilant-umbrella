@@ -1,8 +1,8 @@
 import react, from { usestate } from 'react'
 
-function ToDolist(){
+function ToDolist() {
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(["Tee aamupala, Hae paketti, Soita pomolle"]);
     const [newTask, setNewTask] = usestate("");
 
     function handleInputChange(event){
@@ -29,7 +29,7 @@ function ToDolist(){
     return(
     <div className="to-do-list">
 
-        <h1To-Do-List></h1>
+        <h1>To-Do-List</h1>
 
         <div>
             <input
@@ -39,10 +39,34 @@ function ToDolist(){
                 onChange={handleInputChange}/>
             <button 
                 className="add-button"
-                onClick={}>
+                onClick={addTask}>
                 Add
             </button>
         </div>
+
+        <ol>
+            {tasks.map((task, index) =>
+                <li key={index}>
+                    <span className="text">{task}</span>
+                    <button
+                        className="delete-button"
+                        onClick={() => deleteTask(index)}>
+                        Delete
+                    </button>
+                    <button
+                        className="move-button"
+                        onClick={() => moveTaskUp(index)}>
+                        Up
+                    </button>
+                    <button
+                        className="move-button"
+                        onClick={() => moveTaskDown(index)}>
+                        Down
+                    </button>
+                </li>
+
+            )}
+
 
     </div>);
             
