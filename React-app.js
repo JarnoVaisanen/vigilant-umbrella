@@ -1,6 +1,6 @@
 import react, { useState } from 'react'
 
-function ToDolist() {
+function ToDoList() {
 
     const [tasks, setTasks] = useState(["Tee aamupala, Hae paketti, Soita pomolle"]);
     const [newTask, setNewTask] = useState("");
