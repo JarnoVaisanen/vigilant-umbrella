@@ -64,9 +64,8 @@ function ToDolist() {
                         Down
                     </button>
                 </li>
-
             )}
-
+        </ol>
 
     </div>);
             
