@@ -1,9 +1,9 @@
-import react, { usestate, useCallback } from 'react'
+import react, { useState, useCallback } from 'react'
 
 function ToDolist() {
 
     const [tasks, setTasks] = useState(["Tee aamupala, Hae paketti, Soita pomolle"]);
-    const [newTask, setNewTask] = usestate("");
+    const [newTask, setNewTask] = useState("");
 
     function handleInputChange(event){
         setNewTask(event.target.value);
