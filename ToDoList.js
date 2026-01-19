@@ -58,7 +58,7 @@ function ToDoList() {
             <button 
                 className="add-button"
                 onClick={addTask}>
-                Add
+                Lisää
             </button>
         </div>
 
@@ -69,17 +69,17 @@ function ToDoList() {
                     <button
                         className="delete-button"
                         onClick={() => deleteTask(index)}>
-                        Delete
+                        Poista
                     </button>
                     <button
                         className="move-button"
                         onClick={() => moveTaskUp(index)}>
-                        Up
+                        Ylös
                     </button>
                     <button
                         className="move-button"
                         onClick={() => moveTaskDown(index)}>
-                        Down
+                        Alas
                     </button>
                 </li>
             )}
