@@ -71,7 +71,3 @@ function ToDoList() {
             
 }
 export default ToDoList
-
-Onst x callback
-Onst y callback
-use callback
