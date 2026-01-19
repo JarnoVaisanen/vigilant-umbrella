@@ -2,7 +2,7 @@ import react, { useState } from 'react'
 
 function ToDoList() {
 
-    const [tasks, setTasks] = useState(["Tee aamupala, Hae paketti, Soita pomolle"]);
+    const [tasks, setTasks] = useState(["Banaani, Tomaatti, kurkku"]);
     const [newTask, setNewTask] = useState("");
 
     function handleInputChange(event){
