@@ -34,7 +34,7 @@ function ToDoList() {
         <div>
             <input
                 type="text"
-                placeholder="Enter a task"
+                placeholder="Enter a task..."
                 value={newTask}
                 onChange={handleInputChange}/>
             <button 
