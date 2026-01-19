@@ -1,4 +1,4 @@
-import ToDoList from './ToDoList.js';
+import ToDoList from './ToDoList.jsx';
 
 function App() {
 
