@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 async function runGetStarted() {
   // Replace the uri string with your connection string
-  const uri = '<connection string URI>';
+  const uri = 'mongodb://localhost:<3000>/?directConnection=true>';
   const client = new MongoClient(uri);
 
   try {
