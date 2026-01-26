@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
 }); 
 
 server.listen(port, hostname, () => { 
-  console.log(`Server running at http://${hostname}:${port}/`); });
+  console.log(`Server running at http://${localhost:3000/}:${port}/`); });
 
 Read more here: https://locall.host/3000/
 
