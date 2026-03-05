@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
 }); 
 
 server.listen(port, hostname, () => { 
-  console.log(`Server running at https://vigilant-umbrella-theta.vercel.app/}:${port}/`); });
+  console.log(`Server running at http://vigilant-umbrella-theta.vercel.app/}:${port}/`); });
 
 Read more here: https://locall.host/3000/
 
