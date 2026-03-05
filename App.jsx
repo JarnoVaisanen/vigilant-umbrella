@@ -14,7 +14,7 @@ server.listen(port, hostname, () => {
   mongodb+srv://jarnovaisanen_db_user:<z}mATw&g7c'>pj^>@clustertodoapp.muecmog.mongodb.net/?appName=ClusterToDoApp
 Read more here: https://locall.host/3000/
 
-import ToDoList from './ToDoList.jsx';
+import ToDoList from './page.jsx';
 
 function App() {
 
