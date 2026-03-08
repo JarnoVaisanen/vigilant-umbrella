@@ -95,7 +95,7 @@ export default function ToDoList() {
       <div>
         <input
           type="text"
-          placeholder="Enter a task..."
+          placeholder="Lisää tehtävä..."
           value={newTask}
           onChange={handleInputChange}
           onKeyDown={(e) => e.key === 'Enter' && addTask()}
