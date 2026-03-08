@@ -8,7 +8,8 @@ export async function GET() {
     const tasks = await Task.find({}).sort({ createdAt: 1 });
     return Response.json(tasks);
   } catch (error) {
-    return Response.json({ error: 'Failed to fetch tasks' }, { status: 500 });
+    console.error('GET /api/tasks error:', error);
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }
 
@@ -23,7 +24,8 @@ export async function POST(request) {
     const task = await Task.create({ text });
     return Response.json(task, { status: 201 });
   } catch (error) {
-    return Response.json({ error: 'Failed to create task' }, { status: 500 });
+    console.error('POST /api/tasks error:', error);
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }
 
@@ -35,7 +37,8 @@ export async function DELETE(request) {
     await Task.findByIdAndDelete(id);
     return Response.json({ success: true });
   } catch (error) {
-    return Response.json({ error: 'Failed to delete task' }, { status: 500 });
+    console.error('DELETE /api/tasks error:', error);
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }
 
@@ -48,6 +51,7 @@ export async function PATCH(request) {
     await Task.findByIdAndUpdate(id2, { text: text1 });
     return Response.json({ success: true });
   } catch (error) {
-    return Response.json({ error: 'Failed to reorder tasks' }, { status: 500 });
+    console.error('PATCH /api/tasks error:', error);
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }

@@ -12,7 +12,7 @@ export default function ToDoList() {
     fetch('/api/tasks')
       .then(res => res.json())
       .then(data => {
-        setTasks(data);
+        setTasks(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -109,7 +109,7 @@ export default function ToDoList() {
 
       <ol>
         {tasks.map((task, index) => (
-          <li key={task._id}>
+          <li key={task._id?.toString() || index}>
             <span className="text">{task.text}</span>
             <button className="delete-button" onClick={() => deleteTask(index)}>
               Poista
