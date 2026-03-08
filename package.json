@@ -1,0 +1,30 @@
+{
+  "name": "vigilant-umbrella",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JarnoVaisanen/vigilant-umbrella.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JarnoVaisanen/vigilant-umbrella/issues"
+  },
+  "homepage": "https://github.com/JarnoVaisanen/vigilant-umbrella#readme",
+  "dependencies": {
+    "mongoose": "^9.2.4",
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}
