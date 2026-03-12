@@ -1,17 +1,63 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Box,
+  Paper,
+  CircularProgress,
+  Divider,
+  Fade,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#4caf50",
+    },
+    secondary: {
+      main: "#ef5350",
+    },
+    background: {
+      default: "#1a1a1a",
+      paper: "#2a2a2a",
+    },
+  },
+  typography: {
+    fontFamily: "'Segoe UI', sans-serif",
+    h3: {
+      fontWeight: 700,
+      letterSpacing: "-0.5px",
+    },
+  },
+  shape: {
+    borderRadius: 10,
+  },
+});
 
 export default function ToDoList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Load tasks from MongoDB on mount
   useEffect(() => {
-    fetch('/api/tasks')
-      .then(res => res.json())
-      .then(data => {
+    fetch("/api/tasks")
+      .then((res) => res.json())
+      .then((data) => {
         setTasks(Array.isArray(data) ? data : []);
         setLoading(false);
       })
@@ -24,22 +70,22 @@ export default function ToDoList() {
 
   async function addTask() {
     if (newTask.trim() !== "") {
-      const res = await fetch('/api/tasks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: newTask }),
       });
       const created = await res.json();
-      setTasks(t => [...t, created]);
+      setTasks((t) => [...t, created]);
       setNewTask("");
     }
   }
 
   async function deleteTask(index) {
     const task = tasks[index];
-    await fetch('/api/tasks', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("/api/tasks", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: task._id }),
     });
     setTasks(tasks.filter((_, i) => i !== index));
@@ -52,10 +98,9 @@ export default function ToDoList() {
         updatedTasks[index - 1],
         updatedTasks[index],
       ];
-      // Swap text in DB
-      await fetch('/api/tasks', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/tasks", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id1: tasks[index]._id,
           text1: tasks[index].text,
@@ -74,9 +119,9 @@ export default function ToDoList() {
         updatedTasks[index + 1],
         updatedTasks[index],
       ];
-      await fetch('/api/tasks', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/tasks", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id1: tasks[index]._id,
           text1: tasks[index].text,
@@ -89,40 +134,93 @@ export default function ToDoList() {
   }
 
   return (
-    <div className="to-do-list">
-      <h1>To-Do-List</h1>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container maxWidth="sm" sx={{ py: 8 }}>
+        <Typography variant="h3" align="center" gutterBottom color="primary">
+          To-Do List
+        </Typography>
 
-      <div>
-        <input
-          type="text"
-          placeholder="Lisää tehtävä..."
-          value={newTask}
-          onChange={handleInputChange}
-          onKeyDown={(e) => e.key === 'Enter' && addTask()}
-        />
-        <button className="add-button" onClick={addTask}>
-          Lisää
-        </button>
-      </div>
+        <Box sx={{ display: "flex", gap: 1, mb: 4 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="Kirjoita tehtävä..."
+            value={newTask}
+            onChange={handleInputChange}
+            onKeyDown={(e) => e.key === "Enter" && addTask()}
+            size="small"
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addTask}
+            startIcon={<AddTaskIcon />}
+            sx={{ whiteSpace: "nowrap" }}
+          >
+            Lisää
+          </Button>
+        </Box>
 
-      {loading && <p style={{ color: 'white' }}>Ladataan...</p>}
+        {loading && (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+            <CircularProgress color="primary" />
+          </Box>
+        )}
 
-      <ol>
-        {tasks.map((task, index) => (
-          <li key={task._id?.toString() || index}>
-            <span className="text">{task.text}</span>
-            <button className="delete-button" onClick={() => deleteTask(index)}>
-              Poista
-            </button>
-            <button className="move-button" onClick={() => moveTaskUp(index)}>
-              Ylös
-            </button>
-            <button className="move-button" onClick={() => moveTaskDown(index)}>
-              Alas
-            </button>
-          </li>
-        ))}
-      </ol>
-    </div>
+        {!loading && tasks.length === 0 && (
+          <Typography align="center" color="text.secondary" sx={{ mt: 4 }}>
+            Ei tehtäviä. Lisää ensimmäinen tehtävä!
+          </Typography>
+        )}
+
+        <Paper elevation={3}>
+          <List disablePadding>
+            {tasks.map((task, index) => (
+              <Fade in key={task._id?.toString() || index}>
+                <Box>
+                  <ListItem
+                    sx={{ py: 1.5, px: 2 }}
+                    secondaryAction={
+                      <Box sx={{ display: "flex", gap: 0.5 }}>
+                        <IconButton
+                          size="small"
+                          onClick={() => moveTaskUp(index)}
+                          disabled={index === 0}
+                          color="info"
+                        >
+                          <ArrowUpwardIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => moveTaskDown(index)}
+                          disabled={index === tasks.length - 1}
+                          color="info"
+                        >
+                          <ArrowDownwardIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => deleteTask(index)}
+                          color="secondary"
+                        >
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      </Box>
+                    }
+                  >
+                    <ListItemText
+                      primary={task.text}
+                      primaryTypographyProps={{ fontSize: "1rem" }}
+                    />
+                  </ListItem>
+                  {index < tasks.length - 1 && <Divider />}
+                </Box>
+              </Fade>
+            ))}
+          </List>
+        </Paper>
+      </Container>
+    </ThemeProvider>
   );
 }
