@@ -22,7 +22,7 @@ Julkaisu
 
 Sovellus on julkaistu Vercel-alustalla ja saavutettavissa osoitteessa: 
 
-https://vigilant-umbrella-theta.vercel.app 
+https://vigilant-umbrella-h5qt.vercel.app 
 
 Vercel rakentaa ja julkaisee sovelluksen automaattisesti aina kun muutoksia pushataan GitHub-repositorioon. Ympäristömuuttujat (kuten MongoDB-yhteysosoite) on asetettu Vercel-projektin asetuksissa. 
 
