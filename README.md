@@ -2,7 +2,7 @@
 
 Selainpohjainen tehtävänhallintasovellus jossa tehtävät tallentuvat MongoDB-tietokantaan. Tehtävät säilyvät sivun päivityksen jälkeenkin.
 
-**Julkaistu:** https://vigilant-umbrella-theta.vercel.app
+**Julkaistu:** https://vigilant-umbrella-h5qt.vercel.app/
 
 ---
 
