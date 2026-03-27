@@ -1,6 +1,6 @@
-To-Do List App (https://phkk365-my.sharepoint.com/:w:/g/personal/jarno_vaisanen_edu_salpaus_fi/IQCE9usZ_1TFQKvONlSUTPPUATPoTbbjlvaL1IGHlvfsXPE?e=mClj5p)
+To-Do List App 
 
-Sovelluskuvaus ja tekninen dokumentaatio 
+Sovelluskuvaus ja tekninen dokumentaatio (https://phkk365-my.sharepoint.com/:w:/g/personal/jarno_vaisanen_edu_salpaus_fi/IQCE9usZ_1TFQKvONlSUTPPUATPoTbbjlvaL1IGHlvfsXPE?e=mClj5p)
 
 Sovelluksen kuvaus 
 
