@@ -1,158 +1,96 @@
-To-Do List App 
+# To-Do List App
 
-Sovelluskuvaus ja tekninen dokumentaatio (https://phkk365-my.sharepoint.com/:w:/g/personal/jarno_vaisanen_edu_salpaus_fi/IQCE9usZ_1TFQKvONlSUTPPUATPoTbbjlvaL1IGHlvfsXPE?e=mClj5p)
+Selainpohjainen tehtävänhallintasovellus jossa tehtävät tallentuvat MongoDB-tietokantaan. Tehtävät säilyvät sivun päivityksen jälkeenkin.
 
-Sovelluksen kuvaus 
+**Julkaistu:** https://vigilant-umbrella-theta.vercel.app
 
-To-Do List on selainpohjainen tehtävänhallintasovellus, jossa käyttäjä voi lisätä, poistaa ja järjestellä tehtäviä. Tehtävät tallentuvat MongoDB-tietokantaan, joten ne säilyvät sivun päivityksen jälkeenkin. Sovellus on suunniteltu yksinkertaiseksi ja nopeaksi käyttää. 
+---
 
- 
+## Ominaisuudet
 
-Käyttäjä voi: 
+- Lisää uusia tehtäviä tekstikentän kautta
+- Poista tehtäviä yksitellen
+- Siirrä tehtäviä ylös tai alas järjestyksen muuttamiseksi
+- Tehtävät tallentuvat pysyvästi MongoDB-tietokantaan
 
-    Lisätä uusia tehtäviä tekstikentän kautta 
+---
 
-    Poistaa tehtäviä yksitellen 
+## Käytetyt tekniikat
 
-    Siirtää tehtäviä ylös tai alas järjestyksen muuttamiseksi 
+**Frontend**
+- [Next.js 16](https://nextjs.org/) — React-pohjainen full-stack framework
+- [React 19](https://react.dev/) — käyttöliittymän komponenttikirjasto
+- [Material UI 6](https://mui.com/) — UI-komponentit ja teemoitus
 
-    Nähdä tehtävät tallennettuna myös sivun uudelleenlatauksen jälkeen 
+**Backend**
+- Next.js App Router API Routes — palvelinpuolen REST-rajapinta
+- [Mongoose 9](https://mongoosejs.com/) — MongoDB ODM
+- [MongoDB Atlas](https://www.mongodb.com/atlas) — pilvipohjainen tietokanta
 
-Julkaisu 
+**Infrastruktuuri**
+- [Vercel](https://vercel.com/) — hosting ja automaattinen CI/CD
+- GitHub — versionhallinta
 
-Sovellus on julkaistu Vercel-alustalla ja saavutettavissa osoitteessa: 
+---
 
-https://vigilant-umbrella-h5qt.vercel.app 
+## API
 
-Vercel rakentaa ja julkaisee sovelluksen automaattisesti aina kun muutoksia pushataan GitHub-repositorioon. Ympäristömuuttujat (kuten MongoDB-yhteysosoite) on asetettu Vercel-projektin asetuksissa. 
+Kaikki tehtäväoperaatiot kulkevat `/api/tasks`-reitin kautta.
 
-Käytetyt tekniikat 
+| Metodi | Endpoint | Toiminta |
+|--------|----------|----------|
+| `GET` | `/api/tasks` | Hakee kaikki tehtävät aikajärjestyksessä |
+| `POST` | `/api/tasks` | Luo uuden tehtävän. Body: `{ text: string }` |
+| `DELETE` | `/api/tasks` | Poistaa tehtävän. Body: `{ id: string }` |
+| `PATCH` | `/api/tasks` | Vaihtaa kahden tehtävän järjestystä. Body: `{ id1, text1, id2, text2 }` |
 
-Frontend 
+---
 
-    Next.js 16 — React-pohjainen full-stack framework 
+## Tietomalli
 
-    React 19 — käyttöliittymän komponenttikirjasto 
+```js
+{
+  _id:       ObjectId,  // automaattinen MongoDB-tunniste
+  text:      String,    // tehtävän sisältö (pakollinen)
+  createdAt: Date       // luontiaika (asetetaan automaattisesti)
+}
+```
 
-    Material UI (MUI) 6 — valmiit UI-komponentit ja teemoitus 
+---
 
-    Emotion — MUI:n CSS-in-JS tyylikirjasto 
+## Asennus ja käynnistys
 
-Backend 
+```bash
+# Kloonaa repositorio
+git clone https://github.com/JarnoVaisanen/vigilant-umbrella.git
+cd vigilant-umbrella
 
-    Next.js App Router API Routes — palvelinpuolen REST-rajapinta 
+# Asenna riippuvuudet
+npm install
 
-    Mongoose 9 — MongoDB ODM (Object Document Mapper) 
+# Luo .env.local ja lisää MongoDB-yhteysosoite
+echo "MONGODB_URI=mongodb+srv://käyttäjä:salasana@cluster.mongodb.net/?appName=ClusterToDoApp" > .env.local
 
-    MongoDB Atlas — pilvipohjainen tietokanta 
+# Käynnistä kehitysserveri
+npm run dev
+```
 
-Infrastruktuuri 
+Avaa [http://localhost:3000](http://localhost:3000) selaimessa.
 
-    Vercel — hosting ja automaattinen CI/CD 
+---
 
-    GitHub — versionhallinta 
+## Projektin rakenne
 
-    .env.local — ympäristömuuttujien hallinta 
-
-API-kuvaus 
-
-Sovelluksen REST API sijaitsee osoitteessa /api/tasks. Kaikki tietokantaoperaatiot kulkevat tämän reitin kautta — selain ei koskaan ota yhteyttä MongoDB:hen suoraan. 
-
- 
-
-Metodi 
-	
-
-Endpoint 
-	
-
-Toiminta 
-	
-
-Vastaus 
-
-GET 
-	
-
-/api/tasks 
-	
-
-Hakee kaikki tehtävät tietokannasta aikajärjestyksessä 
-	
-
-JSON-taulukko tehtäväobjekteista 
-
-POST 
-	
-
-/api/tasks 
-	
-
-Luo uuden tehtävän. Body: { text: string } 
-	
-
-Luotu tehtäväobjekti (status 201) 
-
-DELETE 
-	
-
-/api/tasks 
-	
-
-Poistaa tehtävän ID:n perusteella. Body: { id: string } 
-	
-
-{ success: true } 
-
-PATCH 
-	
-
-/api/tasks 
-	
-
-Vaihtaa kahden tehtävän järjestystä. Body: { id1, text1, id2, text2 } 
-	
-
-{ success: true } 
-
- 
-
-Virhetilanteissa API palauttaa HTTP-statuskoodin 400 tai 500 sekä JSON-objektin { error: string }. 
-
-Tietomalli 
-
-Tehtävä tallennetaan MongoDB:hen seuraavalla Mongoose-skeemalla: 
-
- 
-
-Kenttä 
-	
-
-Tyyppi 
-	
-
-Kuvaus 
-
-_id 
-	
-
-ObjectId 
-	
-
-Automaattinen MongoDB-tunniste 
-
-text 
-	
-
-String 
-	
-
-Tehtävän sisältö (pakollinen) 
-
-createdAt 
-	
-
-Date 
-	
-
-Luontiaika (asetetaan automaattisesti) 
+```
+├── app/
+│   ├── layout.jsx        # Sovelluksen juurirakenne
+│   ├── page.jsx          # Pääsivu (To-Do List UI)
+│   ├── globals.css       # Globaalit tyylit
+│   └── api/tasks/
+│       └── route.js      # REST API
+├── lib/
+│   └── mongoose.js       # Tietokantayhteyden hallinta
+├── models/
+│   └── Task.js           # Mongoose-skeema
+└── .env.local            # Ympäristömuuttujat (ei versionhallintaan)
+```
