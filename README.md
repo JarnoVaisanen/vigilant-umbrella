@@ -58,26 +58,7 @@ Kaikki tehtäväoperaatiot kulkevat `/api/tasks`-reitin kautta.
 
 ---
 
-## Asennus ja käynnistys
 
-```bash
-# Kloonaa repositorio
-git clone https://github.com/JarnoVaisanen/vigilant-umbrella.git
-cd vigilant-umbrella
-
-# Asenna riippuvuudet
-npm install
-
-# Luo .env.local ja lisää MongoDB-yhteysosoite
-echo "MONGODB_URI=mongodb+srv://käyttäjä:salasana@cluster.mongodb.net/?appName=ClusterToDoApp" > .env.local
-
-# Käynnistä kehitysserveri
-npm run dev
-```
-
-Avaa [http://localhost:3000](http://localhost:3000) selaimessa.
-
----
 
 ## Projektin rakenne
 
